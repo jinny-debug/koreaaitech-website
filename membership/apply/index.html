@@ -10,7 +10,7 @@
   <p style="font-family:sans-serif;padding:2rem">협회 회원 신청 페이지를 불러오는 중입니다…</p>
   <script type="module">
     const repositoryBase = "/koreaaitech-website";
-    const { default: site } = await import(repositoryBase + "/worker/index.js");
+    const { default: site } = await import(repositoryBase + "/worker/index.js?v=2955cb3");
     const response = await site.fetch(new Request(location.origin + "/membership/apply" + location.search));
     let html = await response.text();
     html = html.replace(/href="\/(?!\/)([^"]*)"/g, (_, target) => {

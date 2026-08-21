@@ -10,7 +10,7 @@
   <p style="font-family:sans-serif;padding:2rem">사이트를 불러오는 중입니다…</p>
   <script type="module">
     const repositoryBase = "/koreaaitech-website";
-    const { default: site } = await import(repositoryBase + "/worker/index.js");
+    const { default: site } = await import(repositoryBase + "/worker/index.js?v=2955cb3");
     const route = location.pathname.startsWith(repositoryBase)
       ? (location.pathname.slice(repositoryBase.length) || "/")
       : "/";
