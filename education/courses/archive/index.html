@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>지난 AI 교육 | 한국AI기술협회</title>
+  <meta name="description" content="한국AI기술협회의 개인·기업·공공기관 대상 AI 교육과정과 맞춤교육 안내">
+</head>
+<body>
+  <p style="font-family:sans-serif;padding:2rem">교육과정 페이지를 불러오는 중입니다…</p>
+  <script type="module">
+    const repositoryBase = "/koreaaitech-website";
+    const { default: site } = await import(repositoryBase + "/worker/education-archive-20260821.js");
+    const response = await site.fetch(new Request(location.origin + "/education/courses" + location.search));
+    let html = await response.text();
+    html = html.replace(/href="\/(?!\/)([^"]*)"/g, (_, target) => {
+      const [path, fragment] = target.split("#");
+      const cleanPath = path.replace(/^\/+|\/+$/g, "");
+      const routePath = cleanPath ? "/" + cleanPath + "/" : "/";
+      return 'href="' + repositoryBase + routePath + (fragment ? "#" + fragment : "") + '"';
+    });
+    document.open();
+    document.write(html);
+    document.close();
+  </script>
+</body>
+</html>
