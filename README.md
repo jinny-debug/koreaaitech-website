@@ -1,26 +1,20 @@
-# Sites Worker ESM starter
+# 한국AI기술협회 웹사이트
 
-Use this starter for a static microsite, click counter, or simple internal UI whose state is browser-scoped. It has no dependencies and needs no install.
+한국AI기술협회 홈페이지 프로토타입 소스입니다.
 
-Edit `worker/index.js`. Use the Sites checkpoint when a coherent milestone is ready to inspect or share; the remote builder then runs the checked-in build and validation scripts. Do not run them as a normal pre-checkpoint step.
+## 공개 사이트
 
-The build copies only `worker/index.js` and `.openai/hosting.json`. Do not add standalone asset files. Embed any essential raster bytes in `worker/index.js` and serve or reference them as a data URL.
+https://jinny-debug.github.io/koreaaitech-website/
 
-For targeted diagnosis after a remote build failure, the same commands are available in the Sites Linux environment:
+## 실행 구조
+
+이 프로젝트는 Cloudflare Worker 형식의 `worker/index.js`를 사용하며, GitHub Pages에서는 `index.html`과 `404.html`이 Worker 응답을 브라우저에서 렌더링합니다.
+
+## 빌드 및 검증
 
 ```sh
 bash scripts/build.sh
 node scripts/validate-artifact.mjs
 ```
 
-The deterministic build produces:
-
-```text
-dist/
-├── .openai/
-│   └── hosting.json
-└── server/
-    └── index.js
-```
-
-`dist/server/index.js` is an ES module with a default export containing `fetch(request, env, ctx)`. Edit `worker/index.js`, not the generated file under `dist/`.
+GitHub Pages 배포는 `.github/workflows/deploy-pages.yml`에서 자동으로 실행됩니다.
