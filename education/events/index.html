@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AI 행사·세미나 | 한국AI기술협회</title>
+  <meta name="description" content="한국AI기술협회의 AI 세미나, 웨비나, 포럼, 밋업 일정과 참가 안내">
+</head>
+<body>
+  <p style="font-family:sans-serif;padding:2rem">교육과정 페이지를 불러오는 중입니다…</p>
+  <script type="module">
+    const repositoryBase = "/koreaaitech-website";
+    const { default: site } = await import(repositoryBase + "/worker/site-events-20260821.js");
+    const response = await site.fetch(new Request(location.origin + "/education/events" + location.search));
+    let html = await response.text();
+    html = html.replace(/href="\/(?!\/)([^"]*)"/g, (_, target) => {
+      const [path, fragment] = target.split("#");
+      const cleanPath = path.replace(/^\/+|\/+$/g, "");
+      const routePath = cleanPath ? "/" + cleanPath + "/" : "/";
+      return 'href="' + repositoryBase + routePath + (fragment ? "#" + fragment : "") + '"';
+    });
+    document.open();
+    document.write(html);
+    document.close();
+  </script>
+</body>
+</html>
