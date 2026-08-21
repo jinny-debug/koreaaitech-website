@@ -10,7 +10,7 @@
   <p style="font-family:sans-serif;padding:2rem">주요사업 페이지를 불러오는 중입니다…</p>
   <script type="module">
     const repositoryBase = "/koreaaitech-website";
-    const { default: site } = await import(repositoryBase + "/worker/index.js?v=courses-20260821");
+    const { default: site } = await import(repositoryBase + "/worker/site-events-20260821.js");
     const response = await site.fetch(new Request(location.origin + "/business" + location.search));
     let html = await response.text();
     html = html.replace(/href="\/(?!\/)([^"]*)"/g, (_, target) => {
