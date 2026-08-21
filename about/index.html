@@ -13,7 +13,12 @@
     const { default: site } = await import(repositoryBase + "/worker/index.js");
     const response = await site.fetch(new Request(location.origin + "/about" + location.search));
     let html = await response.text();
-    html = html.replace(/href="\/(?!\/)/g, 'href="' + repositoryBase + '/');
+    html = html.replace(/href="\/(?!\/)([^"]*)"/g, (_, target) => {
+      const [path, fragment] = target.split("#");
+      const cleanPath = path.replace(/^\/+|\/+$/g, "");
+      const routePath = cleanPath ? "/" + cleanPath + "/" : "/";
+      return 'href="' + repositoryBase + routePath + (fragment ? "#" + fragment : "") + '"';
+    });
     document.open();
     document.write(html);
     document.close();
