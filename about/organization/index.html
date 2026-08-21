@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>조직 안내 | 한국AI기술협회</title>
+  <meta name="description" content="한국AI기술협회 조직 안내 페이지">
+</head>
+<body>
+  <p style="font-family:sans-serif;padding:2rem">조직 안내 페이지를 불러오는 중입니다…</p>
+  <script type="module">
+    const repositoryBase = "/koreaaitech-website";
+    const { default: site } = await import(repositoryBase + "/worker/index.js");
+    const response = await site.fetch(new Request(location.origin + "/about/organization" + location.search));
+    let html = await response.text();
+    html = html.replace(/href="\/(?!\/)/g, 'href="' + repositoryBase + '/');
+    document.open();
+    document.write(html);
+    document.close();
+  </script>
+</body>
+</html>
